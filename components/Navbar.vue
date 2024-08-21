@@ -21,11 +21,7 @@
 			<div v-else class="flex items-center gap-1">
 				<button class="btn btn-ghost "><Icon name="uil:heart" size="20" /></button>
 				<button class="btn btn-ghost "><Icon name="uil:shopping-bag" size="20" /></button>
-				<div class="avatar">
-					<div class="w-10 rounded-full">
-						<img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-					</div>
-				</div>
+				<AvatarDropdown />
 			</div>
 		</div>
     </div>
