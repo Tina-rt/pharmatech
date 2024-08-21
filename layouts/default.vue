@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="max-w-[1454px] m-auto">
         <Navbar />
         <div>
             <slot />

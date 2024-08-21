@@ -1,7 +1,127 @@
 <template>
-    <div>Page d'accueil</div>
+    <Hero />
+    <div class="m-2 p-4">
+        <div
+            class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-5 list-card"
+        >
+            <CardLink
+                :title="card.title"
+                :icon="card.icon"
+                :icon-link="card.iconLink"
+                :color="card.color"
+                v-for="card in linksCard"
+            />
+        </div>
+        <div class="px-8 flex flex-col gap-10">
+            <div class="new-products">
+                <h2 class="text-2xl font-bold">Nouveaux Produits</h2>
+                <div
+                    class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-5 py-4"
+                >
+                    <CardProduit
+                        :produits="produit"
+                        v-for="produit in listProduits"
+                    />
+                </div>
+            </div>
+            <div class="popular-products">
+                <div class="title-products w-full flex justify-between">
+                    <h2 class="text-2xl font-bold">Produits Populaires</h2>
+                    <a href="#" class="btn btn-ghost"
+                        >Voir Tous
+                        <Icon name="material-symbols:arrow-right-alt"
+                    /></a>
+                </div>
+                <div
+                    class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-5 py-4"
+                >
+                    <CardProduit
+                        :produits="produit"
+                        v-for="produit in listProduits"
+                    />
+                </div>
+            </div>
+            <div class="promo">
+                <CardPromoProduits
+                    :produits="produit"
+                    class="promo-produits"
+                    :is-big="index == 0"
+                    v-for="(produit, index) in promoProduits.slice(0, 3)"
+                />
+            </div>
+            <div class="stats">
+                <SectionStats />
+            </div>
+            <div class="aboutus">
+                <SectionAboutUs />
+            </div>
+        </div>
+    </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { produitsMedicaux } from "~/mock/produits.mock";
 
-<style></style>
+const linksCard = [
+    {
+        title: "Promo Offert",
+        iconLink: "~/assets/img/pricetagicon.svg",
+        link: "#",
+        color: "--vert-clair-1",
+    },
+    {
+        title: "Livraison à Domicile",
+        icon: "solar:delivery-outline",
+        link: "#",
+        color: "--rose-clair",
+    },
+    {
+        title: "Conseil Médical",
+        icon: "healthicons:doctor-male",
+        link: "#",
+        color: "--vert-clair-2",
+    },
+    {
+        title: "Appareil Médical",
+        icon: "material-symbols:stethoscope",
+        link: "#",
+        color: "--violet-clair",
+    },
+];
+
+const listProduits = produitsMedicaux.slice(0, 4);
+
+const promoProduits = produitsMedicaux.slice(5, 8);
+</script>
+
+<style lang="scss" scoped>
+.list-card {
+    padding: 2rem 3rem;
+
+    @media screen and (max-width: 786px) {
+        padding: 2rem;
+    }
+}
+
+.promo {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-auto-rows: 300px;
+    gap: 1rem;
+    width: 100%;
+    padding: 2rem 0;
+    .promo-produits:nth-child(1) {
+        grid-row: span 2;
+
+        @media screen and (max-width: 786px) {
+            grid-row: span 1;
+        }
+    }
+    @media screen and (max-width: 786px) {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 300px;
+        gap: 1rem;
+        padding: 2rem 0;
+    }
+}
+</style>
