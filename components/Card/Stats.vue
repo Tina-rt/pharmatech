@@ -39,6 +39,11 @@ const props = defineProps<{
 	aspect-ratio: 305/181;
 	max-width: 400px;
 	min-width: 300px;
+
+	@media screen and (max-width: 786px) {
+		min-width: 100%;
+		
+	}
 	.icon{
 		background-color: white;
 		border-radius: 10px;

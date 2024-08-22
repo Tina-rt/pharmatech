@@ -1,5 +1,5 @@
 <template>
-    <div class="flex gap-4 flex-wrap md:justify-between lg:justify-between xl:justify-between w-full justify-center">
+    <div class="flex gap-4 flex-wrap md:justify-between lg:justify-between xl:justify-between w-full justify-center px-4 md:p-0 lg:p-0 xl:p-0">
         <CardStats
             v-for="stat in stats"
             :key="stat.title"
@@ -7,6 +7,7 @@
             :title="stat.title"
             :icon="stat.icon"
             :color="stat.color"
+            class=""
         />
     </div>
 </template>

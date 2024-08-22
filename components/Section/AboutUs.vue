@@ -1,11 +1,11 @@
 <template>
     <div class="about-us w-full p-2 flex justify-between h-full">
-        <div class="flex flex-col gap-4 lg:w-[30%] md:w-[30%] xl:w-[30%] w-full justify-evenly">
-            <div class="flex flex-col gap-1">
+        <div class="flex flex-col gap-4 lg:w-[30%] md:w-[30%] xl:w-[30%] w-full justify-evenly items-center lg:items-start md:items-start xl:items-start">
+            <div class="flex flex-col  items-center lg:items-start md:items-start xl:items-start gap-1">
                 <span>Qui sommes nous ?</span>
                 <h1>À Propos de Pharmatech</h1>
             </div>
-            <p>
+            <p class="text-center lg:text-left xl:text-left md:text-left">
                 Chez Pharmatech, nous nous engageons à vous offrir une
                 expérience d'achat en ligne de produits de santé simple, sûre et
                 rapide. Notre mission est de rendre les produits de santé
@@ -28,6 +28,10 @@
 .about-us {
     background-color: var(--violet-clair);
     padding: 2rem;
+
+    @media screen and (max-width: 768px) {
+        background-color: white;       
+    }
 
     h1 {
         font-size: 2rem;

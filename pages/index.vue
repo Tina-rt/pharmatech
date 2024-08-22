@@ -1,6 +1,6 @@
 <template>
     <Hero />
-    <div class="m-2 p-4">
+    <div class="md:m-2 lg:m-2 xl:m-2 pt-4">
         <div
             class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-5 list-card"
         >
@@ -12,13 +12,14 @@
                 v-for="card in linksCard"
             />
         </div>
-        <div class="px-8 flex flex-col gap-10">
+        <div class="lg:px-8 md:px-8 xl:px-8 px-1 py-2 flex flex-col gap-10">
             <div class="new-products">
                 <h2 class="text-2xl font-bold">Nouveaux Produits</h2>
                 <div
-                    class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-5 py-4"
+                    class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-5 py-4 place-items-center"
                 >
                     <CardProduit
+                        class="w-full"
                         :produits="produit"
                         v-for="produit in listProduits"
                     />
@@ -33,9 +34,11 @@
                     /></a>
                 </div>
                 <div
-                    class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-5 py-4"
+                    class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-5 py-4 place-items-center"
                 >
                     <CardProduit
+                    class="w-full"
+
                         :produits="produit"
                         v-for="produit in listProduits"
                     />
@@ -55,6 +58,12 @@
             <div class="aboutus">
                 <SectionAboutUs />
             </div>
+            <div class="article-blog">
+                <SectionArticleBlog />
+            </div>
+        </div>
+        <div class="footer-section">
+            <SectionFooter />
         </div>
     </div>
 </template>
@@ -118,8 +127,9 @@ const promoProduits = produitsMedicaux.slice(5, 8);
         }
     }
     @media screen and (max-width: 786px) {
-        grid-template-columns: 1fr;
-        grid-auto-rows: 300px;
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
         gap: 1rem;
         padding: 2rem 0;
     }

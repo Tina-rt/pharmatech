@@ -1,5 +1,5 @@
 <template>
-    <div class="p-5 px-8 flex flex-col gap-4 items-center">
+    <div class="p-5 px-8 flex flex-col gap-4 items-center bg-white">
         <div class="flex justify-between w-full">
             <div class="flex items-center">
                 <NuxtImg src="/img/logo_pharmatech.png" width="100" />
@@ -34,7 +34,7 @@
                 </div>
             </div>
         </div>
-        <CategorieListInline />
+        <CategorieListInline class="hidden md:flex lg:flex xl:flex"/>
     </div>
 </template>
 

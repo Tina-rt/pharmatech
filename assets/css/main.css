@@ -2,28 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
-:root{
-    --vert-principal: #28A745;
-    --vert-fonce: #304D30;
-    --vert-clair-1: #BFE5C7;
-    --vert-clair-2: #C5EF99;
-    --rose-clair: #FAEDC9;
-    --violet-clair: #F8ECFE;
+:root {
+    --vert-principal: #28a745;
+    --vert-fonce: #304d30;
+    --vert-clair-1: #bfe5c7;
+    --vert-clair-2: #c5ef99;
+    --rose-clair: #faedc9;
+    --violet-clair: #f8ecfe;
 }
 
-html{
+html {
     background-color: white !important;
     color: black !important;
     width: 100%;
     height: 100%;
 }
 
-.btn-primary{
+.btn-primary {
     background-color: var(--vert-principal);
     color: white;
     border: none;
 }
 
-.btn-primary:hover{
+.btn-little {
+    min-height: 2.4rem;
+    aspect-ratio: 103/34;
+}
+
+.btn-primary:hover {
     background-color: var(--vert-fonce);
 }
