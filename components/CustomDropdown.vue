@@ -12,7 +12,7 @@
         </button>
         <ul
             v-if="isOpen"
-            class="absolute z-10 bg-transparent py-2 w-40 rounded-md shadow"
+            class="absolute z-10 bg-white py-2 w-40 rounded-md shadow"
         >
             <li v-if="!props.options" class="px-4 py-2">
                 Pas d'options disponible

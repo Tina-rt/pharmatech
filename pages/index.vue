@@ -37,8 +37,7 @@
                     class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-5 py-4 place-items-center"
                 >
                     <CardProduit
-                    class="w-full"
-
+                        class="w-full"
                         :produits="produit"
                         v-for="produit in listProduits"
                     />
@@ -70,6 +69,17 @@
 
 <script lang="ts" setup>
 import { produitsMedicaux } from "~/mock/produits.mock";
+
+useHead({
+    title: "Pharmatech",
+    meta: [
+        {
+            name: "description",
+            content:
+                "Chez Pharmatech, nous nous engageons à vous offrir une expérience d'achat en ligne de produits de santé simple, sûre et rapide. Notre mission est de rendre les produits de santé accessibles à tous, tout en garantissant des services de qualité et une satisfaction client optimale.",
+        },
+    ],
+});
 
 const linksCard = [
     {
