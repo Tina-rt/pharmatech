@@ -8,10 +8,7 @@
             <div class="new-products">
                 <div class="title-products w-full flex justify-between">
                     <h2 class="text-2xl font-bold">Nouveaux Produits</h2>
-                    <a href="#" class="btn btn-ghost"
-                        >Voir Tous
-                        <Icon name="material-symbols:arrow-right-alt"
-                    /></a>
+                  
                 </div>
                 <SectionProductList
                     :product-list="produitsMedicaux.slice(0, 4)"
@@ -20,10 +17,7 @@
 			<div class="popular-product">
                 <div class="title-products w-full flex justify-between">
                     <h2 class="text-2xl font-bold">Produits populaire</h2>
-                    <a href="#" class="btn btn-ghost"
-                        >Voir Tous
-                        <Icon name="material-symbols:arrow-right-alt"
-                    /></a>
+                    
                 </div>
                 <SectionProductList
                     :product-list="produitsMedicaux.slice(4, 16)"

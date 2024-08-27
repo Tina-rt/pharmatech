@@ -130,6 +130,8 @@ const socials = [
         display: flex;
         flex-direction: column;
         gap: 1rem;
+        padding: 1rem;
+
         * {
             display: flex;
             gap: 1rem;
@@ -138,7 +140,6 @@ const socials = [
         h1 {
             font-size: 20px;
         }
-        padding: 1rem;
     }
     .social-link {
         border: 2px solid white;

@@ -2,7 +2,9 @@
     <div class="p-5 px-8 flex flex-col gap-4 items-center bg-white">
         <div class="flex justify-between w-full">
             <div class="flex items-center">
-                <NuxtImg src="/img/logo_pharmatech.png" width="100" />
+                <a href="/">
+                    <NuxtImg src="/img/logo_pharmatech.png" width="100" />
+                </a>
             </div>
             <div
                 class="hidden lg:flex md:flex search-group  flex-1 max-w-[900px] border-2 border-r-5 items-center bg-slate-50 justify-between"
@@ -27,9 +29,9 @@
                     <button class="btn btn-ghost">
                         <Icon name="uil:heart" size="20" />
                     </button>
-                    <button class="btn btn-ghost">
+                    <a href="/cart" class="btn btn-ghost">
                         <Icon name="uil:shopping-bag" size="20" />
-                    </button>
+                    </a>
                     <AvatarDropdown />
                 </div>
             </div>
