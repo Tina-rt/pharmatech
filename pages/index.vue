@@ -14,21 +14,19 @@
         </div>
         <div class="lg:px-8 md:px-8 xl:px-8 px-1 py-2 flex flex-col gap-10">
             <div class="new-products">
-                <h2 class="text-2xl font-bold">Nouveaux Produits</h2>
-                <div
-                    class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-5 py-4 place-items-center"
-                >
-                    <CardProduit
-                        class="w-full"
-                        :produits="produit"
-                        v-for="produit in listProduits"
-                    />
+                <div class="title-products w-full flex justify-between">
+                    <h2 class="text-2xl font-bold">Nouveaux Produits</h2>
+                    <a href="/produits" class="btn btn-ghost"
+                        >Voir Tous
+                        <Icon name="material-symbols:arrow-right-alt"
+                    /></a>
                 </div>
+                <SectionProductList :product-list="produitsMedicaux.slice(0, 4)" />
             </div>
             <div class="popular-products">
                 <div class="title-products w-full flex justify-between">
                     <h2 class="text-2xl font-bold">Produits Populaires</h2>
-                    <a href="#" class="btn btn-ghost"
+                    <a href="/produits" class="btn btn-ghost"
                         >Voir Tous
                         <Icon name="material-symbols:arrow-right-alt"
                     /></a>
@@ -61,9 +59,7 @@
                 <SectionArticleBlog />
             </div>
         </div>
-        <div class="footer-section">
-            <SectionFooter />
-        </div>
+        
     </div>
 </template>
 

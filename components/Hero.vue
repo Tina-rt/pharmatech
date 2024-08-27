@@ -37,11 +37,7 @@
         justify-content: center;
     }
 
-    .title {
-        font-size: 60px;
-        line-height: 81.84px;
-        font-weight: bold;
-    }
+    
 }
 .hero-img {
     width: 50%;

@@ -8,6 +8,16 @@
 
 <script lang="ts" setup>
 
+useHead({
+  title: 'Pharma Tech',
+  meta: [
+    {
+      name: 'description',
+      content: 'A pharmaceutical technology website'
+    }
+  ]
+})
+
 
 
 </script>

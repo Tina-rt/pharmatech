@@ -4,11 +4,11 @@
             <img :src="produits.image" alt="" />
         </div>
         <div class="info-produit">
-            <h3>{{ produits.nom }}</h3>
+            <h3 :title="produits.nom">{{ produits.nom }}</h3>
             <p>{{ produits.prix }}</p>
         </div>
 		<div class="card-footer w-full">
-			<div class="btn w-full"> Ajouter au panier <Icon name="uil:shopping-bag" size="20"/></div>
+			<div class="btn btn-primary border-r-0 w-full"> Ajouter au panier <Icon name="uil:shopping-bag" size="20"/></div>
 		</div>
     </div>
 </template>
@@ -45,11 +45,15 @@ const props = defineProps<{
 
 	.info-produit{
 		width: 100%;
+        max-height: fit-content;
 		padding: 1rem;
 	}
     h3 {
-        font-size: 1.6rem;
+        font-size: 1.4rem;
         font-weight: bold;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-wrap: nowrap
     }
 }
 </style>

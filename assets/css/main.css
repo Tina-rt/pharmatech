@@ -32,3 +32,11 @@ html {
 .btn-primary:hover {
     background-color: var(--vert-fonce);
 }
+
+
+.title {
+    font-size: 60px;
+    line-height: 81.84px;
+    font-weight: bold;
+}
+

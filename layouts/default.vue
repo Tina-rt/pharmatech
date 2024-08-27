@@ -4,6 +4,9 @@
         <div>
             <slot />
         </div>
+        <div class="footer-section">
+            <SectionFooter />
+        </div>
     </div>
 </template>
 

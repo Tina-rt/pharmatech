@@ -7,7 +7,7 @@
             <div
                 class="hidden lg:flex md:flex search-group  flex-1 max-w-[900px] border-2 border-r-5 items-center bg-slate-50 justify-between"
             >
-                <CustomDropdown :options="categoryList" class="min-w-[140px]" />
+                <CustomDropdown :placeholder="'Categorie'" :options="categoryList" class="min-w-[140px]" />
                 <div class="border-r-2 h-2/3 w-1"></div>
                 <input
                     type="text"
@@ -51,4 +51,14 @@ const categoryList = ref([
 const isConnected = ref(true);
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.search-input{
+    outline: none;
+    border: none
+}
+
+.search-input:focus{
+    outline: none;
+}
+
+</style>
