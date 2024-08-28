@@ -11,5 +11,9 @@ export default defineNuxtConfig({
         },
     },
 
-    modules: ["@nuxt/image", "@nuxt/icon", "@pinia/nuxt"],
+    routeRules: {
+        '/cart': {ssr: false}
+    },
+
+    modules: ["@nuxt/image", "@nuxt/icon", "@pinia/nuxt", '@pinia-plugin-persistedstate/nuxt'],
 });

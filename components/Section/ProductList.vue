@@ -23,6 +23,8 @@
 import { produitsMedicaux } from "~/mock/produits.mock";
 import type { Produits } from "~/types/produits.model";
 
+const cartStore = useMyCartStoreStore();
+
 const props = defineProps<{
     productList?: Produits[];
 }>();
@@ -31,6 +33,11 @@ const props = defineProps<{
 const addCart = (product: Produits) => {
     console.log("Addasd")
     console.log(product);
+    cartStore.addProductToCart({
+        produits: product,
+        quantity: 1
+    })
+
     
 };
 </script>

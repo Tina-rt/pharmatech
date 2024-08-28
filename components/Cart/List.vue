@@ -1,98 +1,34 @@
 <template>
     <div class="lg:grid md:grid xl:grid main-cart">
         <div class="cart-list py-4 px-3 flex flex-col gap-4">
-            <CartItem v-for="product in cartList"/>
+            <div
+                class="w-full h-full flex flex-col justify-center items-center text-gray-400 text-center"
+                v-if="cartStore.cartStore.length === 0"
+            >
+                <Icon name="mdi-cart-off" size="40" />
+                <div class="italic">
+                    Vous n'avez pas encore de produits dans le panier
+                </div>
+            </div>
+            <template v-else>
+                <CartItem
+                    v-for="cartItem in cartStore.cartStore"
+                    :cart-item="cartItem"
+                >
+                </CartItem>
+            </template>
         </div>
-       <CartBill class="sticky top-[148px]"/>
+        <CartBill class="sticky top-[148px]" />
     </div>
 </template>
 
 <script lang="ts" setup>
+import type { CartItem } from "~/types/cartItem.models";
 
-const cartList = ref([{
-	id: 1,
-	name: "Produit 1",
-	price: 100,
-	quantity: 1,
-	image: "https://via.placeholder.com/150",
-	inStock: true
-},
-{
-	id: 2,
-	name: "Produit 2",
-	price: 200,
-	quantity: 1,
-	image: "https://via.placeholder.com/150",
-	inStock: false
-},
-{
-	id: 3,
-	name: "Produit 3",
-	price: 300,
-	quantity: 1,
-	image: "https://via.placeholder.com/150",
-	inStock: true
-},
-{
-	id: 4,
-	name: "Produit 4",
-	price: 400,
-	quantity: 1,
-	image: "https://via.placeholder.com/150",
-	inStock: true
-},
-{
-	id: 5,
-	name: "Produit 5",
-	price: 500,
-	quantity: 1,
-	image: "https://via.placeholder.com/150",
-	inStock: true
-},
-{
-	id: 6,
-	name: "Produit 6",
-	price: 600,
-	quantity: 1,
-	image: "https://via.placeholder.com/150",
-	inStock: true
-},
-{
-	id: 7,
-	name: "Produit 7",
-	price: 700,
-	quantity: 1,
-	image: "https://via.placeholder.com/150",
-	inStock: true
-},
-{
-	id: 8,
-	name: "Produit 8",
-	price: 800,
-	quantity: 1,
-	image: "https://via.placeholder.com/150",
-	inStock: true
-},
-{
-	id: 9,
-	name: "Produit 9",
-	price: 900,
-	quantity: 1,
-	image: "https://via.placeholder.com/150",
-	inStock: true
-},
-{
-	id: 10,
-	name: "Produit 10",
-	price: 1000,
-	quantity: 1,
-	image: "https://via.placeholder.com/150",
-	inStock: true
-}])
-
+const cartStore = useMyCartStoreStore();
 </script>
 
-<style scoped lang="scss" >
+<style scoped lang="scss">
 .main-cart {
     grid-template-columns: 3fr 1fr;
     gap: 2rem;
