@@ -12,8 +12,9 @@ export default defineNuxtConfig({
     },
 
     routeRules: {
-        '/cart': {ssr: false}
+        '/cart': {ssr: false},
+        '/order': {ssr: false}
     },
 
-    modules: ["@nuxt/image", "@nuxt/icon", "@pinia/nuxt", '@pinia-plugin-persistedstate/nuxt'],
+    modules: ['@nuxtjs/tailwindcss', "@nuxt/image", "@nuxt/icon", "@pinia/nuxt", '@pinia-plugin-persistedstate/nuxt'],
 });
