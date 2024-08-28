@@ -27,6 +27,9 @@
                     </tr>
                 </tbody>
             </table>
+			<div class="p-2 w-full flex justify-end">
+				<a :href="'/order/'+props.order.id" class=" link italic underline">Voir plus de détails</a>
+			</div>
         </div>
     </div>
 </template>
