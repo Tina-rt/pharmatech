@@ -8,7 +8,7 @@
     
     <ul v-if="isDropdownOpen" class="dropdown-menu">
       <li><a href="#">Profile</a></li>
-      <li><a href="#">Commande</a></li>
+      <li><a href="/order">Commande</a></li>
       <li><a href="#">Logout</a></li>
     </ul>
   </div>
