@@ -8,8 +8,8 @@
 			</div>
 			<Status :status="{label: 'En cours', status: 0}"/>
         </div>
-        <div class="collapse-content">
-            <table class="table">
+        <div class="collapse-content overflow-x-auto">
+            <table class="table table-xs lg:table-lg md:table-md xl:table-lg">
                 <thead>
                     <tr>
                         <th>Produit</th>
