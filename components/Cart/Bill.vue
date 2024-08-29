@@ -33,6 +33,7 @@ const shipping = computed(()=>{
     padding: 1rem;
     background-color: var(--vert-clair-3);
     height: fit-content;
+    border-radius: 12px;
     .value {
         justify-self: end;
         font-weight: bold;

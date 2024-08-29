@@ -86,3 +86,24 @@ p {
     line-height: 27.28px;
     text-align: left;
 }
+
+.form-title{
+    background-color: var(--vert-clair-3);
+    padding: 0.2rem 1rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-block: 1rem;
+}
+
+.radio:checked, .radio[aria-checked="true"]{
+    background-color: var(--vert-principal);
+}
+
+.price, .radiolabel{
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.description-text, .text-secondary{
+    color: #757575;
+}

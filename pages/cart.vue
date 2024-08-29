@@ -7,7 +7,7 @@
             class="actions flex w-full justify-center gap-4 mt-8 py-2 flex-wrap"
         >
             <button class="btn btn-secondary" @click="emptyCart">Vide le panier</button>
-            <button class="btn btn-primary">Continuer votre commande</button>
+            <NuxtLink to="/payout" class="btn btn-primary">Continuer votre commande</NuxtLink>
         </div>
     </div>
 </template>

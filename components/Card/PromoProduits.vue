@@ -54,7 +54,7 @@ const props = defineProps<{
 		padding: 1rem;
 	}
 	h3 {
-		font-size: 1.6rem;
+		font-size: 1.5rem;
 		font-weight: bold;
 	}
 	h3.big{
@@ -72,7 +72,7 @@ const props = defineProps<{
 	}
 
 	.description{
-		font-size: 1.5rem;
+		font-size: 1.3rem;
 	}
 
 	

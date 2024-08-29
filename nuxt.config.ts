@@ -12,9 +12,9 @@ export default defineNuxtConfig({
     },
 
     routeRules: {
-        '/cart': {ssr: false},
-        '/order': {ssr: false}
+        '/cart': {swr: false},
+        '/order': {swr: false}
     },
 
-    modules: ['@nuxtjs/tailwindcss', "@nuxt/image", "@nuxt/icon", "@pinia/nuxt", '@pinia-plugin-persistedstate/nuxt'],
+    modules: ['@nuxtjs/tailwindcss', "@nuxt/image", "@nuxt/icon", "@pinia/nuxt"],
 });

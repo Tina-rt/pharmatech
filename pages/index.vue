@@ -31,15 +31,8 @@
                         <Icon name="material-symbols:arrow-right-alt"
                     /></a>
                 </div>
-                <div
-                    class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-5 py-4 place-items-center"
-                >
-                    <CardProduit
-                        class="w-full"
-                        :produits="produit"
-                        v-for="produit in listProduits"
-                    />
-                </div>
+                <SectionProductList :product-list="produitsMedicaux.slice(4, 8)" />
+                
             </div>
             <div class="promo">
                 <CardPromoProduits

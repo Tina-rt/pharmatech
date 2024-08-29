@@ -57,6 +57,9 @@ watch(
         });
     }
 );
+onMounted(()=>{
+    quantity.value = props.cartItem.quantity;
+})
 </script>
 
 <style lang="scss" scoped>
