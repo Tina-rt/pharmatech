@@ -9,6 +9,7 @@
     --vert-clair-1: #bfe5c7;
     --vert-clair-2: #c5ef99;
     --vert-clair-3: #C5FFC3;
+    --vert-claire-4: #BFFFCE36;
     --btn-primary-hover: #81C784;
     --rose-clair: #faedc9;
     --violet-clair: #f8ecfe;
@@ -106,4 +107,15 @@ p {
 
 .description-text, .text-secondary{
     color: #757575;
+}
+
+.bg-vert-claire-3{
+    background-color: var(--vert-clair-3);
+}
+
+.bg-vert-claire-1{
+    background-color: var(--vert-clair-1);
+}
+.bg-vert-claire-4{
+    background-color: var(--vert-claire-4);
 }

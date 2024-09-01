@@ -6,7 +6,7 @@
             <div class="text-xl">Commande #1 du {{ props.order.date }}</div>
 				<div class="total italic">Ar{{ props.order.total }}</div>
 			</div>
-			<Status :status="{label: 'En cours', status: 0}"/>
+			<Status :status="0"/>
         </div>
         <div class="collapse-content overflow-x-auto">
             <table class="table table-xs lg:table-lg md:table-md xl:table-lg">

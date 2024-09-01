@@ -6,7 +6,7 @@
                 <div class="flex flex-col gap-10">
                     <FormClient />
                     <FormShipping />
-                    <PayementMode />
+                    <FormPayementMode />
                     <div class="p-8 w-full grid place-items-center">
                         <div class="btn btn-primary min-w-[300px]">
                             Payer Maintenant

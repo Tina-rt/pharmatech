@@ -30,6 +30,24 @@
                 />
             </div>
             <div class="flex flex-col">
+                <label for="email">Téléphone*</label>
+                <TextInput
+                    type="tel"
+                    name="telephone"
+                    id="telephone"
+                    class="input input-bordered"
+                />
+            </div>
+            <div class="flex flex-col">
+                <label for="email">Adresse*</label>
+                <TextInput
+                    type="text"
+                    name="adresse"
+                    id="adresse"
+                    class="input input-bordered"
+                />
+            </div>
+            <div class="flex flex-col">
                 <label for="prescription">Préscription*</label>
                 <FileInput />
             </div>

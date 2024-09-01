@@ -7,6 +7,7 @@
 </template>
 
 <script lang="ts" setup>
+import '@vuepic/vue-datepicker/dist/main.css';
 useHead({
     title: "Pharma Tech",
     meta: [

@@ -1,12 +1,12 @@
 <template>
-    <div class="status" :class="{'status-0': props.status.status == 0}">{{ props.status.label }}</div>
+    <div class="status" :class="{'status-0': props.status == 0}">{{ useConstants().ORDER_STATUS[props.status].name }}</div>
 </template>
 
 <script lang="ts" setup>
 import type { Status } from "@/types/status.model";
 
 const props = defineProps<{
-    status: Status;
+    status: number;
 }>();
 </script>
 
