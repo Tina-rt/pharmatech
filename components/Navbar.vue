@@ -36,7 +36,9 @@
                     <div class="indicator">
                         <span
                             class="indicator-item badge badge-primary badge-sm"
-                            >{{ cartItemCount > 9 ? '+9':cartItemCount }}</span
+                            >{{
+                                cartItemCount > 9 ? "+9" : cartItemCount
+                            }}</span
                         >
                         <div>
                             <NuxtLink
@@ -48,16 +50,21 @@
                             </NuxtLink>
                         </div>
                     </div>
-                    <AvatarDropdown />
+                    <AvatarDropdown v-if="authStore.token && authStore.user" />
+                    <template v-else>
+                        <button  onclick="modal_login.showModal()" class="btn btn-primary">Se connecter</button>
+                    </template>
                 </div>
             </div>
         </div>
         <CategorieListInline class="hidden md:flex lg:flex xl:flex" />
     </div>
+    <ModalAuth />
 </template>
 
 <script lang="ts" setup>
 const cartStore = useMyCartStoreStore();
+const authStore = useMyAuthStoreStore();
 
 const cartItemCount = computed(() => {
     return cartStore.cartStore.length;

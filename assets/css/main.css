@@ -119,3 +119,7 @@ p {
 .bg-vert-claire-4{
     background-color: var(--vert-claire-4);
 }
+
+.text-primary{
+    color: var(--vert-principal);
+}
