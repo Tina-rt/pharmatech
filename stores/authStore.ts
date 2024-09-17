@@ -9,7 +9,7 @@ export const useMyAuthStoreStore = defineStore({
     actions: {
         initStore() {
             const cookie = useCookie('token');
-            debugger;
+
             if (cookie.value && cookie.value.length > 0) {
                 this.token = cookie.value;
                 return;
@@ -25,6 +25,8 @@ export const useMyAuthStoreStore = defineStore({
         logout() {
             this.token = null;
             this.user = null;
+            const cookie = useCookie('token');
+            cookie.value = null;
         },
     },
 });

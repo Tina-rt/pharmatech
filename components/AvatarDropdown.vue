@@ -9,7 +9,7 @@
     <ul v-if="isDropdownOpen" class="dropdown-menu">
       <li><a href="#">Profile</a></li>
       <li><NuxtLink to="/order">Commande</NuxtLink></li>
-      <li><a href="#">Logout</a></li>
+      <li><span @click="logout">Logout</span></li>
     </ul>
   </div>
 </template>
@@ -18,6 +18,7 @@
 import { ref } from 'vue';
 
 const isDropdownOpen = ref(false);
+const authStore = useMyAuthStoreStore();
 
 function toggleDropdown() {
   console.log('toggleDropdown');
@@ -29,6 +30,11 @@ function handleClickOutside(event: any) {
   if (!event.target.closest('.avatar-dropdown')) {
     isDropdownOpen.value = false;
   }
+}
+
+const logout = () => {
+    authStore.logout();
+    
 }
 
 onMounted(() => {

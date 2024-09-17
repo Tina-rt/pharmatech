@@ -50,7 +50,7 @@
                             </NuxtLink>
                         </div>
                     </div>
-                    <AvatarDropdown v-if="authStore.token && authStore.user" />
+                    <AvatarDropdown v-if="authStore.token" />
                     <template v-else>
                         <button  @click="openAuthModal" class="btn btn-primary">Se connecter</button>
                     </template>
