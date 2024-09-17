@@ -1,7 +1,10 @@
 <template>
     <div class="flex flex-col gap-4">
         <form @submit="onSubmit" class="flex flex-col gap-3">
-            <div class="alert alert-error text-white" v-if="apiError.length > 0">
+            <div
+                class="alert alert-error text-white"
+                v-if="apiError.length > 0"
+            >
                 {{ apiError }}
             </div>
             <div class="flex gap-2 w-full sm:flex-row flex-col">
@@ -94,7 +97,12 @@
                 </div>
             </div>
             <div class="flex flex-col">
-                <button class="btn btn-primary" value="submit">
+                <button
+                    class="btn btn-primary"
+                    value="submit"
+                    :disabled="btnIsLoading"
+                >
+                    <Icon v-if="btnIsLoading" name="mdi:loading" class="loading-spinner"></Icon>
                     S'inscrire
                 </button>
             </div>
@@ -121,6 +129,8 @@ const { capitalize } = useFormatString();
 const emits = defineEmits(["login", "signup", "createAccountSuccess"]);
 
 const apiError = ref("");
+
+const btnIsLoading = ref(false);
 
 const { errors, handleSubmit, defineField } = useForm({
     validationSchema: yup.object({
@@ -153,7 +163,8 @@ const [password] = defineField("password");
 const [confirmPassword] = defineField("confirmPassword");
 
 const onSubmit = handleSubmit(async () => {
-    apiError.value = ''
+    apiError.value = "";
+    btnIsLoading.value = true;
     const response = await register({
         nom: nom.value,
         prenom: prenom.value,
@@ -162,18 +173,18 @@ const onSubmit = handleSubmit(async () => {
         password: password.value,
     });
 
-    if ("status" in response ) {
+    if ("status" in response) {
         if (response.status === "fail") {
             // emits("login");
             console.log(response.message);
             apiError.value = capitalize(response.message);
-        }
-        else if (response.status === 201){
+        } else if (response.status === 201) {
             console.log(response.message);
             emits("createAccountSuccess");
         }
     }
     console.log(response);
+    btnIsLoading.value = false;
     // emits("login");
 });
 </script>

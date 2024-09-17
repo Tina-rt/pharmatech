@@ -23,7 +23,7 @@
                         utiliser votre email et mot de passe pour vous connecter !
                     </div>
 
-                    <FormLogin @signup="isLogin = false" v-if="isLogin" />
+                    <FormLogin @signup="handleGoSignup" v-if="isLogin" />
                     <FormCreateAccount @login="isLogin = true" @create-account-success="handleCreateAccountOk" v-else />
                 </div>
             </div>
@@ -39,6 +39,11 @@ const accountIsCreated = ref(false);
 const handleCreateAccountOk = () => {
     isLogin.value = true;
     accountIsCreated.value = true;
+};
+
+const handleGoSignup = () => {
+    isLogin.value = false;
+    accountIsCreated.value = false;
 };
 </script>
 
