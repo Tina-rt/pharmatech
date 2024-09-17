@@ -9,7 +9,7 @@
     <ul v-if="isDropdownOpen" class="dropdown-menu">
       <li><a href="#">Profile</a></li>
       <li><NuxtLink to="/order">Commande</NuxtLink></li>
-      <li><span @click="logout">Logout</span></li>
+      <li><span @click="logout" class="cursor-pointer">Logout</span></li>
     </ul>
   </div>
 </template>
