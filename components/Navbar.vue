@@ -52,7 +52,7 @@
                     </div>
                     <AvatarDropdown v-if="authStore.token && authStore.user" />
                     <template v-else>
-                        <button  onclick="modal_login.showModal()" class="btn btn-primary">Se connecter</button>
+                        <button  @click="openAuthModal" class="btn btn-primary">Se connecter</button>
                     </template>
                 </div>
             </div>
@@ -80,6 +80,11 @@ const categoryList = ref([
 ]);
 
 const isConnected = ref(true);
+
+const openAuthModal = () => {
+    window.location.hash = 'auth'
+}
+
 </script>
 
 <style lang="scss" scoped>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <dialog id="modal_login" class="modal modal-bottom sm:modal-middle">
+        <dialog id="auth" class="modal modal-bottom sm:modal-middle">
             <div
                 class="modal-box sm:min-w-[400px] px-0 py-4 relative modal-scroll flex flex-col"
             >
@@ -12,6 +12,7 @@
                         <button
                             class="btn btn-sm btn-square btn-ghost"
                             aria-label="Close"
+                            @click="closeModal"
                         >
                             <Icon name="mdi-close" />
                         </button>
@@ -23,7 +24,7 @@
                         utiliser votre email et mot de passe pour vous connecter !
                     </div>
 
-                    <FormLogin @signup="handleGoSignup" v-if="isLogin" />
+                    <FormLogin @signup="handleGoSignup" @login-success="closeModal" v-if="isLogin" />
                     <FormCreateAccount @login="isLogin = true" @create-account-success="handleCreateAccountOk" v-else />
                 </div>
             </div>
@@ -45,6 +46,10 @@ const handleGoSignup = () => {
     isLogin.value = false;
     accountIsCreated.value = false;
 };
+
+const closeModal = () => {
+    window.location.hash = "";
+}
 </script>
 
 <style></style>

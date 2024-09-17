@@ -32,4 +32,7 @@ useHead({
         },
     ],
 });
+
+useMyAuthStoreStore().initStore();
+
 </script>
