@@ -1,30 +1,55 @@
 <template>
-    <div class="py-4 flex flex-col gap-4">
-        <form action="" class="flex flex-col gap-5">
-            <div class="flex flex-col">
-                <label for="name">Nom</label>
-                <input type="email" name="name" class="input input-bordered" />
+    <div class="flex flex-col gap-4">
+        <form @submit="onSubmit" class="flex flex-col gap-3">
+            <div class="alert alert-error text-white" v-if="apiError.length > 0">
+                {{ apiError }}
             </div>
-            <div class="flex flex-col">
-                <label for="firstname">Prenom</label>
-                <input
-                    type="email"
-                    name="firstname"
-                    class="input input-bordered"
-                />
+            <div class="flex gap-2 w-full sm:flex-row flex-col">
+                <div class="flex flex-col flex-1">
+                    <label for="name">Nom</label>
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Nom"
+                        class="input input-bordered"
+                        v-model="nom"
+                    />
+                    <small class="input-error">{{ errors.nom }}</small>
+                </div>
+                <div class="flex flex-col flex-1">
+                    <label for="firstname">Prenom</label>
+                    <input
+                        type="text"
+                        name="firstname"
+                        placeholder="Prenom"
+                        class="input input-bordered"
+                        v-model="prenom"
+                    />
+                    <small class="input-error">{{ errors.prenom }}</small>
+                </div>
             </div>
 
             <div class="flex flex-col">
                 <label for="email">Adresse Email</label>
-                <input type="email" name="email" class="input input-bordered" />
+                <input
+                    type="email"
+                    name="email"
+                    class="input input-bordered"
+                    placeholder="example@mail.com"
+                    v-model="email"
+                />
+                <small class="input-error">{{ errors.email }}</small>
             </div>
             <div class="flex flex-col">
                 <label for="password">Mot de passe</label>
                 <input
                     type="password"
                     name="password"
+                    placeholder="Mot de passe"
                     class="input input-bordered"
+                    v-model="password"
                 />
+                <small class="input-error">{{ errors.password }}</small>
             </div>
             <div class="flex flex-col">
                 <label for="confirmPassword"
@@ -33,8 +58,11 @@
                 <input
                     type="password"
                     name="confirmPassword"
+                    placeholder="Confirmer votre mot de passe"
                     class="input input-bordered"
+                    v-model="confirmPassword"
                 />
+                <small class="input-error">{{ errors.confirmPassword }}</small>
             </div>
             <div class="flex flex-col">
                 <label for="tel">Téléphone</label>
@@ -58,31 +86,96 @@
                         type="tel"
                         id="phone-input"
                         aria-describedby="helper-text-explanation"
-                        class="input input-bordered text-gray-900  rounded-lg   block w-full ps-10 p-2.5  "
-                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                        class="input input-bordered text-gray-900 rounded-lg block w-full ps-10 p-2.5"
                         placeholder="03X-12-345-67"
                         required
+                        v-model="phone"
                     />
                 </div>
             </div>
             <div class="flex flex-col">
-                <button class="btn btn-primary">S'inscrire</button>
+                <button class="btn btn-primary" value="submit">
+                    S'inscrire
+                </button>
             </div>
         </form>
 
         <div>
-            <div class="divider">Vous avez déjà un compte ?</div>
-            <div class="flex gap-5 w-full justify-center">
-                <button class="btn btn-secondary w-full" @click="emits('login')">Se connecter</button>
+            <div class="flex gap-2 justify-center">
+                <span>Vous avez déjà un compte ?</span>
+                <span class="link text-primary" @click="emits('login')"
+                    >Se connecter</span
+                >
             </div>
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
+import { useForm } from "vee-validate";
+import * as yup from "yup";
+import { register } from "~/utils/api/auth";
 
-const emits = defineEmits(['login', 'signup']);
+const { capitalize } = useFormatString();
 
+const emits = defineEmits(["login", "signup", "createAccountSuccess"]);
+
+const apiError = ref("");
+
+const { errors, handleSubmit, defineField } = useForm({
+    validationSchema: yup.object({
+        nom: yup.string().required("Ce champ est obligatoire"),
+        prenom: yup.string().required("Ce champ est obligatoire"),
+        phone: yup.string().required("Ce champ est obligatoire"),
+        email: yup
+            .string()
+            .email("Veuillez entrer un email valide")
+            .required("Ce champ est obligatoire"),
+        password: yup
+            .string()
+            .min(6, "Le mot de passe doit avoir au moins 6 caractères")
+            .required("Le mot de passe est requis"),
+        confirmPassword: yup
+            .string()
+            .oneOf(
+                [yup.ref("password")],
+                "Les mots de passe ne correspondent pas"
+            )
+            .required("Ce champ est obligatoire"),
+    }),
+});
+
+const [nom] = defineField("nom");
+const [prenom] = defineField("prenom");
+const [phone] = defineField("phone");
+const [email] = defineField("email");
+const [password] = defineField("password");
+const [confirmPassword] = defineField("confirmPassword");
+
+const onSubmit = handleSubmit(async () => {
+    apiError.value = ''
+    const response = await register({
+        nom: nom.value,
+        prenom: prenom.value,
+        phone: phone.value,
+        email: email.value,
+        password: password.value,
+    });
+
+    if ("status" in response ) {
+        if (response.status === "fail") {
+            // emits("login");
+            console.log(response.message);
+            apiError.value = capitalize(response.message);
+        }
+        else if (response.status === 201){
+            console.log(response.message);
+            emits("createAccountSuccess");
+        }
+    }
+    console.log(response);
+    // emits("login");
+});
 </script>
 
 <style></style>

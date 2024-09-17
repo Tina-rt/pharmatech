@@ -18,7 +18,7 @@
                 <label class="input input-bordered flex items-center gap-2 w-full">
                     <input
                         type="text"
-                        class="grow"
+                        class="grow" 
                         placeholder="Date Exp (MM/DD)"
                     />
                     <Icon class="text-secondary" name="mdi-calendar" />

@@ -123,3 +123,12 @@ p {
 .text-primary{
     color: var(--vert-principal);
 }
+
+.input-error{
+    color: red;
+    padding-top: 0.2rem;
+}
+
+.alert-success {
+    background-color: var(--vert-clair-2);
+}
