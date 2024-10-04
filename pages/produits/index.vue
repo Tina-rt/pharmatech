@@ -11,7 +11,7 @@
                   
                 </div>
                 <SectionProductList
-                    :product-list="produitsMedicaux.slice(0, 4)"
+                    :product-list="listProduits.slice(0, 4)"
                 />
             </div>
 			<div class="popular-product">
@@ -20,7 +20,7 @@
                     
                 </div>
                 <SectionProductList
-                    :product-list="produitsMedicaux.slice(4, 16)"
+                    :product-list="listProduits.slice(4, 16)"
                 />
             </div>
 			<div class="Appareil medical">
@@ -32,7 +32,7 @@
                     /></a>
                 </div>
                 <SectionProductList
-                    :product-list="produitsMedicaux.slice(16, 20)"
+                    :product-list="listProduits.slice(16, 20)"
                 />
             </div>
         </div>
@@ -40,5 +40,11 @@
 </template>
 
 <script lang="ts" setup>
-import { produitsMedicaux } from "~/mock/produits.mock";
+import type { Produits } from "~/types/produits.model";
+import { getProductList } from "~/utils/api/produits.api";
+const listProduits = ref<Produits[]>([]);
+
+listProduits.value = await getProductList();
+
+
 </script>

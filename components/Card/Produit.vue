@@ -1,7 +1,7 @@
 <template>
     <div class="card-produits">
         <div class="img-produit">
-            <img :src="produits.image" alt="" />
+            <img :src="renderServerImg(produits.image)" alt="" />
         </div>
         <div class="info-produit">
             <a class="link" :href="'/produits/' + produits.id">
@@ -25,6 +25,7 @@ import { useMyCartStoreStore } from "~/stores/cartStore";
 import type { Produits } from "~/types/produits.model";
 
 const emits = defineEmits(['add-to-cart']);
+const {renderServerImg} = useRenderStatic();
 
 const cartStore = useMyCartStoreStore();
 

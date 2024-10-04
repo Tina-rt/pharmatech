@@ -4,16 +4,16 @@
     >
         <div class="flex gap-5 justify-between items-center cart-item-desc">
             <div class="cart-item-image">
-                <img :src="props.cartItem.produits.image" alt="product" />
+                <img :src="renderServerImg(props.cartItem.produits.image)" alt="product" />
             </div>
             <div class="cart-item-details w-full">
                 <h2 class="product-name">{{ props.cartItem.produits.nom }}</h2>
                 <p class="text-green in-stock">En Stock</p>
-                <button>Remove</button>
+                <button @click="handleRemoveCart">Remove</button>
             </div>
         </div>
         <div class="quantity h-full flex items-center">
-            <InputNumber class="" v-model="quantity" />
+            <InputNumber @change="handleAddQuantity" class="" v-model="quantity" />
         </div>
         <div
             class="total font-bold min-w-40 lg:min-w-fit xl:min-w-fit md:min-w-fit"
@@ -32,12 +32,24 @@ const props = defineProps<{
 
 const cartStore = useMyCartStoreStore();
 
+const { renderServerImg } = useRenderStatic();
+
 const quantity = ref(1);
 const totalPrice = computed(()=>{
-    console.log( props.cartItem.produits.prix * quantity.value)
    return props.cartItem.produits.prix * quantity.value * 1000
 })
 
+
+const handleRemoveCart = () => {
+    cartStore.removeProductFromCart(props.cartItem);
+}
+
+const handleAddQuantity = () => {
+    cartStore.updateCartItem({
+        ...props.cartItem,
+        quantity: quantity.value,
+    });
+}
 
 
 watch(
@@ -45,18 +57,20 @@ watch(
     (newCartItem) => {
         quantity.value = newCartItem.quantity;
         // totalPrice.value = newCartItem.produits.prix * quantity.value
+    }, {
+        immediate: true
     }
 );
 
-watch(
-    () => quantity.value,
-    (newQuantity) => {
-        cartStore.updateCartItem({
-            ...props.cartItem,
-            quantity: newQuantity,
-        });
-    }
-);
+// watch(
+//     () => quantity.value,
+//     (newQuantity) => {
+//         cartStore.updateCartItem({
+//             ...props.cartItem,
+//             quantity: newQuantity,
+//         });
+//     }
+// );
 onMounted(()=>{
     quantity.value = props.cartItem.quantity;
 })

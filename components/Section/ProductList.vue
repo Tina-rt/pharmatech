@@ -31,8 +31,7 @@ const props = defineProps<{
 
 
 const addCart = (product: Produits) => {
-    console.log("Addasd")
-    console.log(product);
+
     cartStore.addProductToCart({
         produits: product,
         quantity: 1
@@ -40,6 +39,11 @@ const addCart = (product: Produits) => {
 
     
 };
+
+const getProductList = async () => {
+    
+}
+
 </script>
 
 <style scoped lang="scss">

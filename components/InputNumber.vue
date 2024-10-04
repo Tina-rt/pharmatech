@@ -16,12 +16,18 @@ const props = defineProps<{
     max?: number;
     min?: number;
 }>();
+const emit = defineEmits<{
+    (e: 'change'): void;
+}>();
+
+
 
 const add = () => {
     if (props.max && value.value >= props.max){
         return;
     }
     value.value++;
+    emit('change');
 };
 
 const minus = () => {
@@ -29,6 +35,8 @@ const minus = () => {
         return;
     }
     value.value--;
+    emit('change');
+
 };
 
 watch(value, () => {

@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import type { CartItem } from "~/types/cartItem.models";
 import type { Produits } from "~/types/produits.model";
+import { addProductToCart, addProductToCartDb, emptyCartDb, removeProductFromCartDb, updateCartItemDb } from "~/utils/api/cart.api";
 
 const { calculateTotal, calculateTva } = useCalculateCart();
 
@@ -14,7 +15,7 @@ export const useMyCartStoreStore = defineStore({
                     cartStore: JSON.parse(cartStore) as CartItem[],
                     shipping: 1000,
                 };
-            } 
+            }
         }
         return {
             cartStore: [] as CartItem[],
@@ -23,7 +24,31 @@ export const useMyCartStoreStore = defineStore({
     },
 
     actions: {
+        initCartStore() {
+            if (useMyAuthStoreStore().token) {
+                $api("panier").then((res) => {
+                    console.log(res);
+                    const { data } = res;
+                    console.log(data)
+                    this.cartStore = data.map((item: any) => {
+                        return {
+                            produits: {
+                                id: item.id,
+                                nom: item.nom,
+                                prix: item.prix_total,
+                                image: item.image,
+                            },
+                            quantity: item.quantite,
+                        };
+                    });
+                    console.log(this.cartStore)
+                }).catch((e)=>{
+                    console.log(e);
+                });
+            }
+        },
         addProductToCart(cartItem: CartItem) {
+            console.log("Ato")
             if (
                 this.cartStore.some(
                     (val) => val.produits.id == cartItem.produits.id
@@ -33,17 +58,23 @@ export const useMyCartStoreStore = defineStore({
                     (val) => val.produits.id == cartItem.produits.id
                 );
                 this.cartStore[index].quantity += cartItem.quantity;
+                updateCartItemDb(cartItem.produits.id, this.cartStore[index].quantity);
                 return;
             }
             this.cartStore.push(cartItem);
+            addProductToCartDb(cartItem.produits.id, cartItem.quantity);
             this.updateCartStore();
         },
         removeProductFromCart(cartItem: CartItem) {
             const index = this.cartStore.indexOf(cartItem);
             this.cartStore.splice(index);
             this.updateCartStore();
+            console.log(cartItem.produits)
+            removeProductFromCartDb(cartItem.produits.id);
+
         },
         updateCartItem(cartItem: CartItem) {
+            console.log("Update cart item ... >>>");
             const index = this.cartStore.findIndex(
                 (val) => val.produits.id == cartItem.produits.id
             );
@@ -52,10 +83,12 @@ export const useMyCartStoreStore = defineStore({
                 this.cartStore[index] = cartItem;
             }
             this.updateCartStore();
+            updateCartItemDb(cartItem.produits.id, cartItem.quantity);
         },
         emptyCart() {
             this.cartStore = [];
             this.updateCartStore();
+            emptyCartDb();
         },
         updateCartStore() {
             localStorage.setItem("cartStore", JSON.stringify(this.cartStore));

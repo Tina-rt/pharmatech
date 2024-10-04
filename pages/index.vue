@@ -21,7 +21,7 @@
                         <Icon name="material-symbols:arrow-right-alt"
                     /></a>
                 </div>
-                <SectionProductList :product-list="produitsMedicaux.slice(0, 4)" />
+                <SectionProductList :product-list="listProduits.slice(0, 4)" />
             </div>
             <div class="popular-products">
                 <div class="title-products w-full flex justify-between">
@@ -31,7 +31,7 @@
                         <Icon name="material-symbols:arrow-right-alt"
                     /></a>
                 </div>
-                <SectionProductList :product-list="produitsMedicaux.slice(4, 8)" />
+                <SectionProductList :product-list="listProduits.slice(4, 8)" />
                 
             </div>
             <div class="promo">
@@ -57,7 +57,15 @@
 </template>
 
 <script lang="ts" setup>
+import axios from "axios";
 import { produitsMedicaux } from "~/mock/produits.mock";
+import type { Produits } from "~/types/produits.model";
+
+import {getProductList} from "~/utils/api/produits.api";
+
+const apiBase = useRuntimeConfig().public.apiBase;
+
+
 
 useHead({
     title: "Pharmatech",
@@ -97,9 +105,15 @@ const linksCard = [
     },
 ];
 
-const listProduits = produitsMedicaux.slice(0, 4);
+const listProduits = ref<Produits[]>([]);
 
 const promoProduits = produitsMedicaux.slice(5, 8);
+
+
+
+listProduits.value = await getProductList();
+
+
 </script>
 
 <style lang="scss" scoped>
