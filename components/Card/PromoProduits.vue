@@ -4,8 +4,8 @@
 			<div class="badge">{{ props.produits.reduction }}% OFF</div>
             <h3  :class="{'big': props.isBig}">{{ props.produits.nom }}</h3>
             <p class="description" :class="{'big': props.isBig}">{{ props.produits.description }}</p>
-			<p class="prev-price">Ar{{ props.produits.prix }}</p>
-			<p class="new-price">Ar{{ props.produits.prix }}</p>
+			<p class="prev-price">{{ $formatCurrency(props.produits.prix) }}</p>
+			<p class="new-price">{{ $formatCurrency(props.produits.prix) }}</p>
         </div>
         <div class="img-produit">
             <img :src="props.produits.image" alt="" />

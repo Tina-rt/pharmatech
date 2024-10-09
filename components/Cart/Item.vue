@@ -18,7 +18,7 @@
         <div
             class="total font-bold min-w-40 lg:min-w-fit xl:min-w-fit md:min-w-fit"
         >
-            Ar{{ totalPrice }}
+            {{ $formatCurrency(totalPrice) }}
         </div>
     </div>
 </template>
@@ -36,7 +36,7 @@ const { renderServerImg } = useRenderStatic();
 
 const quantity = ref(1);
 const totalPrice = computed(()=>{
-   return props.cartItem.produits.prix * quantity.value * 1000
+   return props.cartItem.produits.prix * quantity.value
 })
 
 

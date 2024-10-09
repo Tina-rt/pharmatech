@@ -26,10 +26,9 @@
                                 /><span>{{ cartitem.nomProduit }}</span>
                             </td>
                             <td class="text-right">{{ cartitem.quantiteCommandee }}</td>
-                            <td>Ar {{ cartitem.prixUnitaire }}</td>
+                            <td>{{ $formatCurrency(cartitem.prixUnitaire) }}</td>
                             <td>
-                                Ar
-                                {{ cartitem.prixAvecTVA }}
+                                {{ $formatCurrency(cartitem.prixAvecTVA) }}
                             </td>
                         </tr>
                     </tbody>

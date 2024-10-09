@@ -26,8 +26,8 @@
                     <tr v-for="cartitem in props.order.orders">
                         <td>{{ cartitem.nomProduit }}</td>
                         <td>{{ cartitem.quantiteCommandee }}</td>
-                        <td>Ar {{ cartitem.prixUnitaire }}</td>
-                        <td>Ar {{ cartitem.prixAvecTVA }}</td>
+                        <td>{{ $formatCurrency(cartitem.prixUnitaire) }}</td>
+                        <td>{{ $formatCurrency(cartitem.prixAvecTVA) }}</td>
                     </tr>
                 </tbody>
             </table>

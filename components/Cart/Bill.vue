@@ -4,28 +4,26 @@
             <div>Sous Total</div>
             <div>(3 Produits)</div>
         </label>
-        <div class="value sous-total">Ar{{ cartStore.total }}</div>
+        <div class="value sous-total">
+            {{ $formatCurrency(cartStore.total) }}
+        </div>
         <label for="tva">TVA</label>
-        <div class="value tva">Ar {{ cartStore.tva }}</div>
+        <div class="value tva">{{ $formatCurrency(cartStore.tva) }}</div>
         <label for="shipping">Frais de livraison</label>
-        <div class="value shipping">Ar {{ shipping }}</div>
+        <div class="value shipping">{{ $formatCurrency(shipping) }}</div>
         <div class="flex w-full justify-between col-span-2 total-sec">
             <label for="total">Total</label>
-            <div class="total">Ar {{ cartStore.totalBillWithTva }}</div>
+            <div class="total">{{ $formatCurrency(cartStore.totalBillWithTva) }}</div>
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
-
 const cartStore = useMyCartStoreStore();
 
-
-
-const shipping = computed(()=>{
-	return 1000
-})
-
+const shipping = computed(() => {
+    return 1000;
+});
 </script>
 
 <style lang="scss" scoped>

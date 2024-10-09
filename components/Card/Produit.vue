@@ -7,7 +7,7 @@
             <a class="link" :href="'/produits/' + produits.id">
                 <h3 :title="produits.nom">{{ produits.nom }}</h3>
             </a>
-            <p>Ar{{ produits.prix }}</p>
+            <p>{{ $formatCurrency(produits.prix) }}</p>
         </div>
         <div class="card-footer w-full">
             <div class="btn btn-primary border-r-0 w-full" @click="handleAddToCart">
