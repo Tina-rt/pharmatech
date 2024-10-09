@@ -126,7 +126,7 @@ p {
 
 .input-error{
     color: red;
-    padding-top: 0.2rem;
+    /* padding-top: 0.2rem; */
 }
 
 .alert-success {

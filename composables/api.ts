@@ -18,7 +18,7 @@ export const $api = async (
 };
 
 export const $renderImage = (imgPath: string): string => {
-    const apiParent = useRuntimeConfig().public.apiParent;
+    const apiParent = useRuntimeConfig().public.apiBase;
     const newUrl = new URL(`${apiParent}/${imgPath}`);
     return newUrl.toString();
 };

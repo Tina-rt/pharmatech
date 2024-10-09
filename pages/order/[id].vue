@@ -4,8 +4,8 @@
 
         <div class="grid main-details-commande">
             <div class="flex flex-col gap-3 w-full">
-        <h2 class="font-bold">Commande N° #{{ currentOrder.id }}</h2>
-                
+                <h2 class="font-bold">Commande N° #{{ currentOrder.id }}</h2>
+
                 <table class="table table-xs md:table-md lg:table-lg">
                     <thead>
                         <tr>
@@ -16,19 +16,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="cartitem in currentOrder.cartItems">
+                        <tr v-for="cartitem in currentOrder_">
                             <td class="flex items-center gap-2">
+                                <!-- {{ cartitem.image }} -->
                                 <img
-                                    :src="cartitem.produits.image"
+                                    :src="$renderImage(cartitem.image!)"
                                     alt=""
-                                    class="w-10"
-                                /><span>{{ cartitem.produits.nom }}</span>
+                                    class="w-20"
+                                /><span>{{ cartitem.nomProduit }}</span>
                             </td>
-                            <td class="text-right">{{ cartitem.quantity }}</td>
-                            <td>Ar {{ cartitem.produits.prix }}</td>
+                            <td class="text-right">{{ cartitem.quantiteCommandee }}</td>
+                            <td>Ar {{ cartitem.prixUnitaire }}</td>
                             <td>
                                 Ar
-                                {{ cartitem.produits.prix * cartitem.quantity }}
+                                {{ cartitem.prixAvecTVA }}
                             </td>
                         </tr>
                     </tbody>
@@ -44,23 +45,31 @@
                     </div>
                 </div>
                 <CartBill />
-                <div class="flex flex-col gap-2 justify-evenly rounded-md bg-vert-claire-4 p-4 ">
+                <div
+                    class="flex flex-col gap-2 justify-evenly rounded-md bg-vert-claire-4 p-4"
+                >
                     <div class="flex gap-4">
                         <div class="text-green font-bold">Date de commande</div>
                         <div>{{ currentOrder.date }}</div>
                     </div>
                     <div class="flex gap-4">
-                        <div class="text-green font-bold">Date d'arrivée: </div>
+                        <div class="text-green font-bold">Date d'arrivée:</div>
                         <div>{{ currentOrder.date }}</div>
                     </div>
                 </div>
-                <div class="flex flex-col gap-2 justify-evenly rounded-md bg-vert-claire-4 p-4 ">
+                <div
+                    class="flex flex-col gap-2 justify-evenly rounded-md bg-vert-claire-4 p-4"
+                >
                     <div class="flex flex-wrap gap-2">
-                        <div class="text-green font-bold">Adresse de Livraison:</div>
-                        <div>Analakely Lot 20.22bis, rue RAKOTO JOHN Antananarivo</div>
+                        <div class="text-green font-bold">
+                            Adresse de Livraison:
+                        </div>
+                        <div>
+                            Analakely Lot 20.22bis, rue RAKOTO JOHN Antananarivo
+                        </div>
                     </div>
                     <div class="flex flex-wrap gap-2">
-                        <div class="text-green font-bold">Payé par: </div>
+                        <div class="text-green font-bold">Payé par:</div>
                         <div>Carte de crédit</div>
                     </div>
                 </div>
@@ -70,7 +79,8 @@
 </template>
 
 <script lang="ts" setup>
-import type { OrderItem } from "~/types/orderItem.models";
+import type { OrderItem, ProduitOrder } from "~/types/orderItem.models";
+import { getOrderByIdDb } from "~/utils/api/order.api";
 
 const route = useRoute();
 const currentOrder = ref<OrderItem>({
@@ -123,6 +133,13 @@ const currentOrder = ref<OrderItem>({
 });
 
 const currentOrderId = route.params.id;
+const currentOrder_ = ref<ProduitOrder[]>([]);
+getOrderByIdDb(+currentOrderId).then((res) => {
+    if (res){
+        currentOrder_.value = res as ProduitOrder[];
+    }
+});
+console.log(currentOrder_);
 </script>
 
 <style scoped lang="scss">
