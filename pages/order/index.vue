@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts" setup>
-// import { orders } from '~/mock/orders.mock';
+import { orders } from '~/mock/orders.mock';
 import { getOrderDb } from '~/utils/api/order.api';
 
 const orders = ref();

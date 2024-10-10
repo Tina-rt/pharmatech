@@ -29,6 +29,7 @@ export default defineNuxtConfig({
 
     routeRules: {
         '/cart': {ssr: false},
+        '/search': {ssr: false},
         '/payout': {ssr: false},
         '/order': {swr: false}
     },

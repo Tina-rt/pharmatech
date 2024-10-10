@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="hero-img lg:min-h-[500px]">
-            <NuxtImg src="/img/hero.png"></NuxtImg>
+            <img src="/img/hero.png"></img>
         </div>
     </div>
 </template>

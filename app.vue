@@ -35,5 +35,5 @@ useHead({
 
 useMyAuthStoreStore().initStore();
 useMyCartStoreStore().initCartStore();
-
+useMyCategorieStoreStore().initStore();
 </script>

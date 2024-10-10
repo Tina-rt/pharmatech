@@ -25,7 +25,7 @@ export const useMyCartStoreStore = defineStore({
         }
         return {
             cartStore: [] as CartItem[],
-            shipping: 1000,
+            shipping: 5000,
         };
     },
 
@@ -79,7 +79,7 @@ export const useMyCartStoreStore = defineStore({
         },
         removeProductFromCart(cartItem: CartItem) {
             const index = this.cartStore.indexOf(cartItem);
-            this.cartStore.splice(index);
+            this.cartStore.splice(index, 1);
             this.updateCartStore();
             console.log(cartItem.produits);
             removeProductFromCartDb(cartItem.produits.id);

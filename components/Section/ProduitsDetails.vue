@@ -1,38 +1,72 @@
 <template>
-    <div class="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 xl:grid-cols-2 grid-rows-1 gap-5 px-2 lg:px-5 md:px-5 xl:px-5 max-h-[100dvh] md:max-h-[400px] lg:max-h-[400px] xl:max-h-[400px]">
+    <div
+        class="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 xl:grid-cols-2 grid-rows-1 gap-5 px-2 lg:px-5 md:px-5 xl:px-5 max-h-[100dvh] md:max-h-[400px] lg:max-h-[400px] xl:max-h-[400px]"
+    >
         <div class="img-container">
-            <img
-                src="https://m.consumablemedicalsupplies.com/photo/pl32220616-latex_free_disposable_3_way_foley_catheter_3_30ml_balloon_capacity.jpg"
-                alt=""
-            />
+            <img :src="$renderImage(props.produit.image)" alt="" />
         </div>
         <div class="flex flex-col gap-5">
             <div class="description flex flex-col gap-4 justify-center">
                 <div class="py-4">
-                    <div class="product-name bold-title">Foley Catheter</div>
+                    <div class="product-name bold-title">
+                        {{ props.produit.nom }}
+                    </div>
                     <div class="in-stock">En stock</div>
-                    <div class="price bold-title">Ar 129000.00</div>
+                    <div class="price bold-title">
+                        {{ $formatCurrency(props.produit.prix) }}
+                    </div>
                 </div>
                 <div class="grid grid-cols-2 gap-5 items-center">
                     <label for="" class="bold-title">Catégorie</label>
-                    <div class="cat-val">Appareil médical</div>
+                    <div class="cat-val">{{ props.produit.categorie.nom }}</div>
                     <label for="" class="bold-title">Ordonnance</label>
-                    <div class="ord-val">Obligatoire</div>
+                    <div class="ord-val">Pas obligatoire</div>
                     <label for="quantity" class="bold-title">Quantité</label>
-                    <InputNumber />
+                    <InputNumber v-model="quantite" />
                 </div>
             </div>
             <div class="flex w-full">
-                <button class="btn btn-primary w-fit">
+                <button class="btn btn-primary w-fit" @click="handleAddToCart">
                     Ajouter au panier
-                    <Icon name="mdi:cart-plus" size="20"/>
+                    <Icon name="mdi:cart-plus" size="20" />
                 </button>
             </div>
         </div>
+        <Toast ref="toast" />
+
     </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import type { Produits } from "~/types/produits.model";
+
+const props = defineProps<{
+    produit: Produits;
+}>();
+
+const quantite = ref(1)
+
+const cartStore = useMyCartStoreStore();
+const authStore = useMyAuthStoreStore();
+const toast = ref();
+
+const handleAddToCart = () => {
+    if (!authStore.token) {
+        window.location.hash = "auth";
+        return;
+    }
+    cartStore.addProductToCart({
+        produits: props.produit,
+        quantity: quantite.value,
+    });
+    toast.value.show(
+        "Produit ajouté au panier",
+        `${props.produit.nom} a été ajouté au panier`,
+        "mdi:check-circle",
+        "success"
+    );
+};
+</script>
 
 <style scoped lang="scss">
 .img-container {

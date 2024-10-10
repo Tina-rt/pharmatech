@@ -16,10 +16,10 @@
             <div class="new-products">
                 <div class="title-products w-full flex justify-between">
                     <h2 class="text-2xl font-bold">Nouveaux Produits</h2>
-                    <a href="/produits" class="btn btn-ghost"
+                    <NuxtLink to="/produits" class="btn btn-ghost"
                         >Voir Tous
                         <Icon name="material-symbols:arrow-right-alt"
-                    /></a>
+                    /></NuxtLink>
                 </div>
                 <SectionProductList :product-list="listProduits.slice(0, 4)" />
             </div>

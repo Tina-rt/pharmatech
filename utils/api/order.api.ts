@@ -31,11 +31,19 @@ export const getOrderDb = async (): Promise<OrderItem[] | boolean> => {
     return finalData;
 };
 
-export const getOrderByIdDb = async (id: number): Promise<ProduitOrder[] | boolean> => {
-    const { data, status } = await $api(`commande/${id}`);
+export const getOrderByIdDb = async (id: number): Promise<any> => {
+    const { data, status, sousTotal, total } = await $api(`commande/${id}`);
     if (status != "success") {
         return false;
     }
     
-    return data;
+    return {data, sousTotal, total};
 }
+
+export const getLivraisonByOrderIdDb = async (orderId: number) => {
+    const { data, status } = await $api(`livraison/${orderId}`);
+    if (status != "success" || !data) {
+        return false;
+    }
+    return data[0];
+ }

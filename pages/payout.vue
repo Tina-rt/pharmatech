@@ -24,7 +24,11 @@
                 </div>
             </div>
             <div>
-                <CartBill />
+                <CartBill
+                    :product-number="cartStore.cartStore.length"
+                    :shipping="cartStore.shipping"
+                    />
+                    <!-- :sous-total="cartStore." -->
                 <div class="promo-list">
                     <CardPromoProduits
                         :produits="produit"
@@ -57,14 +61,14 @@ const createFormData = () => {
     for (const key in formClientData) {
         formData.append(key, formClientData[key]);
     }
-    if (!formShipping.value.adresseDefault){
-        formData.set('adresse', formShipping.value.newAdresse);
+    if (!formShipping.value.adresseDefault) {
+        formData.set("adresse", formShipping.value.newAdresse);
     }
-    formData.append('date_livraison', formShipping.value.shippingDate);
-    formData.append('transporteur', '');
+    formData.append("date_livraison", formShipping.value.shippingDate);
+    formData.append("transporteur", "");
 
     return formData;
-}
+};
 
 const proceedPayement = async () => {
     if (formClient.value) {
@@ -77,9 +81,8 @@ const proceedPayement = async () => {
             const res = await createOrderDb();
             console.log(res);
             if (res) {
+                currFormData.set("commande_id", res.id);
 
-                currFormData.set('commande_id', res.id);
-                
                 const data = await validateShippingDb(currFormData);
                 console.log(data);
                 cartStore.emptyCart({ syncDb: false });

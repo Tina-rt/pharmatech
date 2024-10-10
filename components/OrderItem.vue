@@ -6,9 +6,9 @@
         >
             <div>
                 <div class="text-xl">
-                    Commande #{{ props.order.id }} du {{ props.order.date }}
+                    Commande #{{ props.order.id }} du {{ moment(props.order.date).format("DD/MM/YYYY") }}
                 </div>
-                <div class="total italic">Ar{{ props.order.total }}</div>
+                <div class="total italic">{{ $formatCurrency(props.order.total) }}</div>
             </div>
             <Status :status-message="props.order.statusMessage"/>
         </div>
@@ -44,7 +44,7 @@
 
 <script lang="ts" setup>
 import type { OrderItem } from "~/types/orderItem.models";
-
+import moment from "moment";
 const props = defineProps<{
     order: OrderItem;
 }>();

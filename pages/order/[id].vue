@@ -43,17 +43,17 @@
                         <Status :status="currentOrder.status" />
                     </div>
                 </div>
-                <CartBill />
+                <CartBill :product-number="currentOrder_.length" :sous-total="sousTotal" :tva="0" :total="total" :shipping="5000" />
                 <div
                     class="flex flex-col gap-2 justify-evenly rounded-md bg-vert-claire-4 p-4"
                 >
                     <div class="flex gap-4">
                         <div class="text-green font-bold">Date de commande</div>
-                        <div>{{ currentOrder.date }}</div>
+                        <div>{{ dateCommandeDetail.dateCommande }}</div>
                     </div>
                     <div class="flex gap-4">
                         <div class="text-green font-bold">Date d'arrivée:</div>
-                        <div>{{ currentOrder.date }}</div>
+                        <div>{{ dateCommandeDetail.dateArrivee ?? '-'  }}</div>
                     </div>
                 </div>
                 <div
@@ -64,7 +64,7 @@
                             Adresse de Livraison:
                         </div>
                         <div>
-                            Analakely Lot 20.22bis, rue RAKOTO JOHN Antananarivo
+                           {{ livraisonDetail.adresse }}, {{ livraisonDetail.ville }}
                         </div>
                     </div>
                     <div class="flex flex-wrap gap-2">
@@ -78,8 +78,9 @@
 </template>
 
 <script lang="ts" setup>
+import moment from "moment";
 import type { OrderItem, ProduitOrder } from "~/types/orderItem.models";
-import { getOrderByIdDb } from "~/utils/api/order.api";
+import { getLivraisonByOrderIdDb, getOrderByIdDb } from "~/utils/api/order.api";
 
 const route = useRoute();
 const currentOrder = ref<OrderItem>({
@@ -133,12 +134,39 @@ const currentOrder = ref<OrderItem>({
 
 const currentOrderId = route.params.id;
 const currentOrder_ = ref<ProduitOrder[]>([]);
+
+const sousTotal = ref(0);
+const total = ref(0);
+
+const dateCommandeDetail = ref({
+    dateCommande: "",
+    dateArrivee: null
+})
+
+const livraisonDetail = ref({
+    adresse: "",
+    ville: ""
+});
+
 getOrderByIdDb(+currentOrderId).then((res) => {
     if (res){
-        currentOrder_.value = res as ProduitOrder[];
+        const {data, sousTotal: st, total: tt} = res;
+        sousTotal.value = st;
+        total.value = tt;
+        currentOrder_.value = data as ProduitOrder[];
+        dateCommandeDetail.value.dateCommande = moment(res.dateCommande).format("DD/MM/YYYY");  
     }
 });
-console.log(currentOrder_);
+
+
+getLivraisonByOrderIdDb(+currentOrderId).then((res) => {
+    livraisonDetail.value = {
+        adresse: res.adresse,
+        ville: res.ville
+    }
+});
+
+
 </script>
 
 <style scoped lang="scss">

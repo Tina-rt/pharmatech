@@ -14,7 +14,7 @@
                     />
                     <div>
                         <label for="paiementMethod" class="font-bold radiolabel"
-                            >Carte Crédit</label
+                            >Carte Bancaire</label
                         >
                         <div class="description-text">
                             Nous acceptions tous types de carte crédits

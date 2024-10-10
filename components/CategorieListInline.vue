@@ -1,28 +1,23 @@
 <template>
     <div class="flex gap-3 w-full justify-evenly my-2 flex-wrap">
-        <div
+        <NuxtLink
             class="category-item"
-            v-for="(category, index) in categorieList"
+            v-for="(category, index) in props.categorieList"
             :key="index"
+            :to="`/search?cat=${category.id}`"
         >
             {{ category.nom }}
-        </div>
+        </NuxtLink>
     </div>
 </template>
 
 <script lang="ts" setup>
 import type { Category } from '~/types/category.model';
 
-const categorieList = ref<Category[]>([
-    
-]);
+const props = defineProps<{
+    categorieList: Category[];
+}>();
 
-const getCategorieList = async () => {
-    const { data } = await $api("categorie");
-    categorieList.value = data;
-};
-
-await getCategorieList();
 </script>
 
 <style></style>

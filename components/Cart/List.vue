@@ -18,7 +18,7 @@
                 </CartItem>
             </template>
         </div>
-        <CartBill class="sticky top-[148px]" />
+        <CartBill :product-number="cartStore.cartStore.length" :tva="cartStore.tva" :shipping="cartStore.shipping" :sous-total="cartStore.total" :total="cartStore.total"  class="sticky top-[148px]" />
     </div>
 </template>
 
@@ -26,6 +26,7 @@
 import type { CartItem } from "~/types/cartItem.models";
 
 const cartStore = useMyCartStoreStore();
+
 </script>
 
 <style scoped lang="scss">

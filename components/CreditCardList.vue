@@ -1,6 +1,6 @@
 <template>
   <div class="flex gap-2 w-full" >
-    <NuxtImg :src="img" v-for="img in cardImgList"/>
+    <img :src="img" v-for="img in cardImgList"/>
   </div>
 </template>
 
