@@ -5,7 +5,7 @@
             <div>({{ props.productNumber ?? 0 }} Produits)</div>
         </label>
         <div class="value sous-total">
-            {{ $formatCurrency(total) }}
+            {{ total ? $formatCurrency(total) : 0 }}
         </div>
         <label for="tva">TVA</label>
         <div class="value tva">{{ $formatCurrency(tva) ?? 0 }}</div>
@@ -23,7 +23,7 @@ const props = defineProps<{
     sousTotal: number;
     tva: number;
     shipping: number;
-    total: number;
+    total?: number;
     productNumber: number;
 }>()
 

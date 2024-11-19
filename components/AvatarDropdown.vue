@@ -2,12 +2,12 @@
   <div class="avatar-dropdown relative">
     <div class="avatar" @click="toggleDropdown">
       <div class="w-10 rounded-full">
-        <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+        <img src="https://avatar.iran.liara.run/public/3"/>
       </div>
     </div>
     
     <ul v-if="isDropdownOpen" class="dropdown-menu">
-      <li><a href="#">Profile</a></li>
+      <li><NuxtLink to="/profile">Profile</NuxtLink></li>
       <li><NuxtLink to="/order">Commande</NuxtLink></li>
       <li><span @click="logout" class="cursor-pointer">Logout</span></li>
     </ul>
@@ -19,6 +19,7 @@ import { ref } from 'vue';
 
 const isDropdownOpen = ref(false);
 const authStore = useMyAuthStoreStore();
+const router = useRouter();
 
 function toggleDropdown() {
   console.log('toggleDropdown');
@@ -34,7 +35,8 @@ function handleClickOutside(event: any) {
 
 const logout = () => {
     authStore.logout();
-    
+    useMyCartStoreStore().emptyCart();
+    router.push('/');
 }
 
 onMounted(() => {

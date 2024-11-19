@@ -31,7 +31,8 @@ export default defineNuxtConfig({
         '/cart': {ssr: false},
         '/search': {ssr: false},
         '/payout': {ssr: false},
-        '/order': {swr: false}
+        '/order': {swr: false},
+        '/profile': {ssr: false}
     },
 
     modules: ['@nuxtjs/tailwindcss', "@nuxt/image", "@nuxt/icon", "@pinia/nuxt"],

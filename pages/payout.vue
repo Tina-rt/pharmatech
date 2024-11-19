@@ -6,7 +6,7 @@
                 <div class="flex flex-col gap-10">
                     <FormClient ref="formClient" />
                     <FormShipping ref="formShipping" />
-                    <FormPayementMode />
+                    <FormPayementMode ref="formPayementMethod" />
                     <div class="p-8 w-full grid place-items-center">
                         <div
                             class="btn btn-primary min-w-[300px]"
@@ -26,34 +26,52 @@
             <div>
                 <CartBill
                     :product-number="cartStore.cartStore.length"
+                    :tva="cartStore.tva"
                     :shipping="cartStore.shipping"
-                    />
-                    <!-- :sous-total="cartStore." -->
+                    :sous-total="cartStore.total"
+                    :total="cartStore.total"
+                />
+                <!-- :sous-total="cartStore." -->
                 <div class="promo-list">
                     <CardPromoProduits
                         :produits="produit"
                         class="promo-produits"
-                        v-for="(produit, index) in promoProduits.slice(0, 3)"
+                        v-for="(produit, index) in produits.slice(0, 3)"
                     />
                 </div>
             </div>
         </div>
+        <ModalCongrats ref="modal_congrats" @close="toOrder" />
     </div>
 </template>
 
 <script lang="ts" setup>
+
+definePageMeta({
+    middleware: ['payout']
+})
+
 import { produitsMedicaux } from "~/mock/produits.mock";
 import { createOrderDb } from "~/utils/api/order.api";
+import { addPaiement } from "~/utils/api/paiement.api";
+import { getProductList } from "~/utils/api/produits.api";
 import { validateShippingDb } from "~/utils/api/shipping.api";
 
 const formClient = ref<any>(null);
 const formShipping = ref<any>(null);
+const formPayementMethod = ref<any>(null);
+const modal_congrats = ref<any>(null);
 
 const router = useRouter();
 const cartStore = useMyCartStoreStore();
 const promoProduits = produitsMedicaux.slice(5, 8);
+const produits = await getProductList();
 
 const errorInForm = ref(false);
+
+const toOrder = () => {
+    router.push("/order");
+};
 
 const createFormData = () => {
     const formData = new FormData();
@@ -85,8 +103,18 @@ const proceedPayement = async () => {
 
                 const data = await validateShippingDb(currFormData);
                 console.log(data);
+                const dataPayement = await addPaiement({
+                    commande_id: res.id,
+                    montant: cartStore.getTotal(),
+                    methode_paiement_id:
+                        formPayementMethod.value.payementMethod,
+                    reference: "",
+                    statut_paiement: "paye",
+                });
                 cartStore.emptyCart({ syncDb: false });
-                router.push("/order");
+                modal_congrats.value.openModal();
+
+                // router.push("/order");
             }
         }
     }

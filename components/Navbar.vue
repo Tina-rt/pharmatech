@@ -49,10 +49,10 @@
                     Se connecter
                 </div>
                 <div v-else class="flex items-center gap-4">
-                    <button class="btn btn-ghost">
+                    <!-- <button class="btn btn-ghost">
                         <Icon name="mdi:bell-badge-outline" size="20" />
-                    </button>
-                    <div class="indicator">
+                    </button> -->
+                    <div class="indicator ml-2">
                         <span
                             class="indicator-item badge badge-primary badge-sm"
                             >{{

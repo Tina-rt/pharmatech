@@ -25,14 +25,14 @@
             </div>
             <div class="Appareil medical">
                 <div class="title-products w-full flex justify-between">
-                    <h2 class="text-2xl font-bold">Appareil médicale</h2>
-                    <a href="#" class="btn btn-ghost"
+                    <h2 class="text-2xl font-bold">Tous les produits</h2>
+                    <!-- <a href="#" class="btn btn-ghost"
                         >Voir Tous
                         <Icon name="material-symbols:arrow-right-alt"
-                    /></a>
+                    /></a> -->
                 </div>
                 <SectionProductList
-                    :product-list="listProduits.slice(16, 20)"
+                    :product-list="listProduits"
                 />
             </div>
         </div>

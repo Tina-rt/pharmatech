@@ -10,8 +10,14 @@ export const useMyCategorieStoreStore = defineStore({
     },
     actions: {
         async initStore() {
-            const { data } = await $api("categorie");
-            this.categorieList = data;
+            try{
+
+                const { data } = await $api("categorie");
+                this.categorieList = data;
+            }catch(e){
+                this.categorieList = [];
+                console.log("error");
+            }
         },
 
         getCatById(id: number) {

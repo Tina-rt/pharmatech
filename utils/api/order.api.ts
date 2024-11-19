@@ -11,24 +11,28 @@ export const createOrderDb = async () => {
 };
 
 export const getOrderDb = async (): Promise<OrderItem[] | boolean> => {
-    const { data, status } = await $api("commande");
+    try {
+        const { data, status } = await $api("commande");
 
-    if (status != "success") {
-        return false;
+        if (status != "success") {
+            return false;
+        }
+        const finalData: OrderItem[] = data.map((item: any) => {
+            return {
+                id: item.idCommande,
+                date: item.date,
+                statusMessage: item.statut,
+                orders: item.commande,
+                total: item.commande.reduce(
+                    (acc: number, curr: any) => acc + curr.prixAvecTVA,
+                    0
+                ),
+            };
+        });
+        return finalData;
+    } catch (e) {
+        return [];
     }
-    const finalData: OrderItem[] = data.map((item: any) => {
-        return {
-            id: item.idCommande,
-            date: item.date,
-            statusMessage: item.statut,
-            orders: item.commande,
-            total: item.commande.reduce(
-                (acc: number, curr: any) => acc + curr.prixAvecTVA,
-                0
-            ),
-        };
-    });
-    return finalData;
 };
 
 export const getOrderByIdDb = async (id: number): Promise<any> => {
@@ -36,9 +40,9 @@ export const getOrderByIdDb = async (id: number): Promise<any> => {
     if (status != "success") {
         return false;
     }
-    
-    return {data, sousTotal, total};
-}
+
+    return { data, sousTotal, total };
+};
 
 export const getLivraisonByOrderIdDb = async (orderId: number) => {
     const { data, status } = await $api(`livraison/${orderId}`);
@@ -46,4 +50,4 @@ export const getLivraisonByOrderIdDb = async (orderId: number) => {
         return false;
     }
     return data[0];
- }
+};

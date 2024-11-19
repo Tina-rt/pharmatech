@@ -1,5 +1,5 @@
 <template>
-    <div class="flex gap-3 w-full justify-evenly my-2 flex-wrap">
+    <div class="flex gap-3 w-full justify-evenly my-2 catlist">
         <NuxtLink
             class="category-item"
             v-for="(category, index) in props.categorieList"
@@ -12,12 +12,21 @@
 </template>
 
 <script lang="ts" setup>
-import type { Category } from '~/types/category.model';
+import type { Category } from "~/types/category.model";
 
 const props = defineProps<{
     categorieList: Category[];
 }>();
-
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.catlist {
+    max-width: 100dvw;
+    overflow-x: auto;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    .category-item {
+        text-wrap: nowrap;
+    }
+}
+</style>

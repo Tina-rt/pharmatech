@@ -12,7 +12,7 @@
                 ici, où chaque achat est une ordonnance pour des économies.
             </p>
             <div>
-                <button class="btn">
+                <button class="btn" @click="$router.push('/produits')">
                     Commander Maintenant <Icon name="uil:shopping-bag" />
                 </button>
             </div>

@@ -32,14 +32,13 @@
                     /></a>
                 </div>
                 <SectionProductList :product-list="listProduits.slice(4, 8)" />
-                
             </div>
             <div class="promo">
                 <CardPromoProduits
                     :produits="produit"
                     class="promo-produits"
                     :is-big="index == 0"
-                    v-for="(produit, index) in promoProduits.slice(0, 3)"
+                    v-for="(produit, index) in listProduits.slice(9, 12)"
                 />
             </div>
             <div class="stats">
@@ -52,7 +51,6 @@
                 <SectionArticleBlog />
             </div>
         </div>
-        
     </div>
 </template>
 
@@ -61,11 +59,9 @@ import axios from "axios";
 import { produitsMedicaux } from "~/mock/produits.mock";
 import type { Produits } from "~/types/produits.model";
 
-import {getProductList} from "~/utils/api/produits.api";
+import { getProductList } from "~/utils/api/produits.api";
 
 const apiBase = useRuntimeConfig().public.apiBase;
-
-
 
 useHead({
     title: "Pharmatech",
@@ -109,11 +105,12 @@ const listProduits = ref<Produits[]>([]);
 
 const promoProduits = produitsMedicaux.slice(5, 8);
 
-
-
-listProduits.value = await getProductList();
-
-
+try {
+    listProduits.value = await getProductList();
+} catch (e) {
+    console.log("Error while fetching product list", e);
+    listProduits.value = [];
+}
 </script>
 
 <style lang="scss" scoped>

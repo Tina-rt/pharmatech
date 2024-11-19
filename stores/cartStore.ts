@@ -106,6 +106,9 @@ export const useMyCartStoreStore = defineStore({
         updateCartStore() {
             localStorage.setItem("cartStore", JSON.stringify(this.cartStore));
         },
+        getTotal(){
+            return calculateTotal(this.cartStore, this.shipping);
+        }
     },
     getters: {
         total(state) {

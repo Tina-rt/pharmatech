@@ -9,30 +9,45 @@ export const getProductList = async (filter?: {
     if (filter?.category !== undefined) {
         queryUrl += `&cat=${filter?.category}`;
     }
-
-    const { data } = await $api(queryUrl, {
-        method: "GET",
-    });
-    return data;
+    try {
+        const { data } = await $api(queryUrl, {
+            method: "GET",
+        });
+        return data;
+    } catch (e) {
+        return [];
+    }
 };
 
 export const getProduitById = async (id: number) => {
-    const { data } = await $api(`produit/${id}`, {
-        method: "GET",
-    });
-    return data;
+    try {
+        const { data } = await $api(`produit/${id}`, {
+            method: "GET",
+        });
+        return data;
+    } catch (e) {
+        return null;
+    }
 };
 
 export const getTopProduits = async () => {
-    const { data } = await $api("produit/top", {
-        method: "GET",
-    });
-    return data;
+    try {
+        const { data } = await $api("produit/top", {
+            method: "GET",
+        });
+        return data;
+    } catch (e) {
+        return [];
+    }
 };
 
 export const getProduitByCategorie = async (id: number) => {
-    const { data } = await $api(`produit/categorie/${id}`, {
-        method: "GET",
-    });
-    return data;
+    try {
+        const { data } = await $api(`produit/categorie/${id}`, {
+            method: "GET",
+        });
+        return data;
+    } catch (e) {
+        return [];
+    }
 };
